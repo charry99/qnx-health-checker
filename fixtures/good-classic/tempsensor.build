@@ -1,0 +1,13 @@
+[virtual=x86_64,elf] .bootstrap = {
+    startup-x86_64
+    PATH=/proc/boot procnto-smp-instr
+}
+[+script] .script = {
+    devc-ser8250 -e -b115200 0x3f8,4 &
+    io-sock -d e1000 -ptcpip &
+    slogger2 &
+    reopen
+    tempsensor &
+}
+[type=link] /dev/console=/dev/ser1
+[type=link] /usr/lib/ldqnx.so.2=/proc/boot/libc.so

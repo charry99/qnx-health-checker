@@ -1,0 +1,8 @@
+[virtual=x86_64,elf] .bootstrap = {
+    PATH=/proc/boot procnto-smp-instr
+}
+[+script] .script = {
+    io-pkt -d e1000 -ptcpip &
+    reopen
+    sensor-daemon &
+}
